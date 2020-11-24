@@ -8,13 +8,13 @@ q1:
  amax:10
 q2:
  pos:
-  min:-inf
-  max:inf
+  min:-2.4
+  max:2.4
  vmax:10
  amax:10
 q3:
  pos:
-  min:-inf
-  max:inf
+  min:0
+  max:3
  vmax:10
  amax:10

@@ -15,9 +15,9 @@ def test_qi(qi, qi_min, qi_max, i):
     Fonction qui vérifie si un qi respecte sa valeur max et min.
     '''
     if qi > qi_max:
-        raise ValueError("q" + i + " > q" + i + " max")
+        raise ValueError("q" + str(i) + " > q" + str(i) + " max")
     elif qi < qi_min:
-        raise ValueError("q" + i + " < q" + i + " min")
+        raise ValueError("q" + str(i) + " < q" + str(i) + " min")
 
 def MGI(xyz, m, t34, E1 = -1, E3 = 1, qi_min = [-inf, -inf, -inf], qi_max = [inf, inf, inf], qi_prev = [0, 0, 0]):
     '''

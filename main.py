@@ -77,7 +77,8 @@ def display_traj(pos, param_points, param_robot):
         
         coord = list(u.extract_xyz(t04))
         xyz.append(coord)
-    
+
+    xyz = np.round(xyz, 3)
     xyz = np.array(xyz)
     
     ax.plot(xyz[:,0], xyz[:,1], xyz[:,2])
@@ -110,9 +111,9 @@ def display_vit_xyz(qi, dqi, param_points, param_robot, tf, te):
     title1 = ["dphix", "dphiy", "dphiz"]
     
     x = np.arange(0, np.sum(tf)-te, te)
-    
-    dxt = np.array(dxt)
-    dphit = np.array(dphit)
+
+    dxt = np.round(np.array(dxt), 3)
+    dphit = np.round(np.array(dphit), 3)
     
     for i in range(3):
         plt.subplot(3,2,1+i*2)
@@ -186,7 +187,7 @@ if __name__ == "__main__":
             qi_prev = qi
         
         except ValueError:
-            print("La postion du point " + param_points.get_nom(i) + " est impossible !")
+            print("La position du point " + param_points.get_nom(i) + " est impossible !")
             sys.exit()
         
         
@@ -198,7 +199,7 @@ if __name__ == "__main__":
             point_dqi.append(dqi)
         
         except ValueError:
-            print("Le movement au point " + param_points.get_nom(i) + " est impossible !")
+            print("Le mouvement au point " + param_points.get_nom(i) + " est impossible !")
             sys.exit()
     
     vMax = params.get_vmax(1,2,3)
@@ -212,9 +213,10 @@ if __name__ == "__main__":
     for i in range(1, nb_points):
         (p, v, a, t) = getPolyCommande(point_qi[i-1], point_dqi[i-1], [0,0,0], point_qi[i], point_dqi[i], [0,0,0], vMax=vMax, aMax=aMax, te=te)
         pos.append(p)
+
         vit.append(v)
         acc.append(a)
         tf.append(t)
-        
+
     display(pos, vit, acc, tf, te, param_points, params)
         
