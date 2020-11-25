@@ -60,5 +60,12 @@ B2:
  Si les parametres sont compatibles avec le bras manipulateur, une fenetre MatPlot s'ouvrira.
  Sinon, un message d'erreur s'affichera.  
  
+ ### Repere Outil
+ Une modification du repere outil est possible en changeant le contenu du fichier *t34* representant la matrice T34 du modele du BM.
+ 
+ ### Parametres du bras manipulateur
+Une modification des parametres du BM (butées, vitesses et accélarations maximales) est possible en changeant le contenu du fichier *robot_param*.
+ 
+ 
  ---
  Tout les tests ont étés effectués dans un environnement *Python 3.8* dans les IDE *Spyder* et *PyCharm*
