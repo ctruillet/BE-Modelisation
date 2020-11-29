@@ -54,7 +54,47 @@ def display_qi(ypos, yvit, yacc, tf, te, param_points):
         plt.xlabel("Time (s)")
     
     plt.show()
-    
+
+
+def display_trajQi(pos):
+    '''Fonction pour afficher la trajectoire de q dans l'espace généralisé des qi.'''
+    fig = plt.figure()
+    ax = fig.gca(projection='3d')
+
+    t34 = params.get_param('t34', np.eye(4))
+    m = params.get_param('m', 2, float)
+
+    qi_prev = [0, 0, 0]
+    qi_min = params.get_posmin(1, 2, 3)
+    qi_max = params.get_posmax(1, 2, 3)
+
+    for i in range(nb_points):
+        xyz = param_points.get_pos(i)
+
+        try:
+            qi = MGI(xyz, m, t34, qi_min=qi_min, qi_max=qi_max, qi_prev=qi_prev)
+            point_qi.append(qi)
+            qi_prev = qi
+            u.plotPoint3D(qi, ax, param_points.get_nom(i))
+            #print(param_points.get_nom(i), ":", param_points.get_pos(i), " -> ", qi)
+        except ValueError:
+            sys.exit()
+
+
+    p = np.transpose(np.array(pos))
+
+
+    q = np.round(p, 3)
+    q = np.array(q)
+
+    ax.plot(q[:, 0], q[:, 1], q[:, 2])
+
+    ax.set_xlabel('q1')
+    ax.set_ylabel('q2')
+    ax.set_zlabel('q3')
+
+    plt.show()
+
 def display_traj(pos, param_points, param_robot):
     '''Fonction pour afficher la courbe de la trajectoir du robot en 3D à l'aide du MGD.'''
     fig = plt.figure()
@@ -154,7 +194,7 @@ def display(pos, vit, acc, tf, te, param_points, param_robot):
     display_qi(pos_t, vit_t, acc_t, tf, te, param_points)
     
     display_traj(pos_t, param_points, param_robot)
-    
+    display_trajQi(pos_t)
     display_vit_xyz(pos_t, vit_t, param_points, param_robot, tf, te)
         
         
@@ -185,7 +225,7 @@ if __name__ == "__main__":
             qi = MGI(xyz, m, t34, qi_min=qi_min, qi_max=qi_max, qi_prev=qi_prev)
             point_qi.append(qi)
             qi_prev = qi
-        
+            #print(param_points.get_nom(i), ":", param_points.get_pos(i)," -> ",qi)
         except ValueError:
             print("La position du point " + param_points.get_nom(i) + " est impossible !")
             sys.exit()

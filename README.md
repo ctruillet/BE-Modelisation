@@ -12,7 +12,7 @@
  Le bon fonctionnement de ce programme necessite *Python 3* ainsi que les librairies *MatPlotLib* et *Numpy*.
  
  ## Utilisation
-Les positions des points *A*, *B* et *C* sont a entrer dans le fichier *position* sous le format suivant :
+Les positions des points *A*, *B* et *C* sont à entrer dans le fichier *position* sous le format suivant :
 ```python
 A:
  pos:
